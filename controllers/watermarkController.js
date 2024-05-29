@@ -27,7 +27,7 @@ exports.applyWatermark = async (req, res) => {
     await applyWatermarkToVideo(videoPath, imagePath, outputFilePath);
     const url = await uploadToCloudStorage(outputFilePath);
 
-    console.log('Watermarked video URL:', url); // Debugging line
+    console.log('Watermarked video URL:', url);
     res.status(200).json({ url });
   } catch (error) {
     console.error('Error in applyWatermark controller:', error);
