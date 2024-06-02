@@ -5,20 +5,20 @@ const watermarkRoutes = require("./routes/watermark");
 const cors = require("cors");
 const app = express();
 
-app.use(cors({
-  origin: function (origin, callback) {
-    const allowedOrigins = ['https://watermark-fron.web.app/', 'https://ass2vid.storage.googleapis.com'];  // List your allowed origins here
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  allowedHeaders: 'X-Requested-With,content-type,Authorization'
-}));
+app.use((req, res, next) => {
+  // Update this line to allow your web app's origin
+  res.setHeader('Access-Control-Allow-Origin', 'http://watermark.fron.web.app');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type,Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', true);
 
+  if (req.method === 'OPTIONS') {
+    res.setHeader('Access-Control-Max-Age', '86400');
+    res.sendStatus(204);
+  } else {
+    next();
+  }
+});
 
 app.use(express.json());
 app.use('/api/watermark', watermarkRoutes);
