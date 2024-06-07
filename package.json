@@ -7,6 +7,7 @@
     "dev": "nodemon index.js"
   },
   "dependencies": {
+    "@google-cloud/pubsub": "^4.4.1",
     "@google-cloud/storage": "^5.14.4",
     "axios": "^0.24.0",
     "bull": "^3.29.3",
