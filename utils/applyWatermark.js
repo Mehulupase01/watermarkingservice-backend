@@ -18,7 +18,6 @@ exports.applyWatermarkToVideo = (videoPath, imagePath, outputFilePath) => {
   return new Promise((resolve, reject) => {
     console.log('Starting video processing:', { videoPath, imagePath, outputFilePath });
 
-    // Apply watermark centered with transparency
     ffmpeg(videoPath)
       .input(imagePath)
       .complexFilter([
@@ -49,7 +48,7 @@ exports.uploadToCloudStorage = (filePath) => {
       }
       const publicUrl = `https://${bucket.name}.storage.googleapis.com/${file.name}`;
       console.log('File uploaded successfully:', publicUrl);
-      fs.unlinkSync(filePath); // Remove file from server after upload
+      fs.unlinkSync(filePath); 
       resolve(publicUrl);
     });
   });

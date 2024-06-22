@@ -2,7 +2,7 @@ const { PubSub } = require('@google-cloud/pubsub');
 const pubsub = new PubSub();
 
 const publishToPubSub = async (data) => {
-  const topicName = 'watermark-topic';  // Ensure you replace this with your actual topic name
+  const topicName = 'watermark-topic';
   const dataBuffer = Buffer.from(JSON.stringify(data));
   try {
     const messageId = await pubsub.topic(topicName).publish(dataBuffer);
