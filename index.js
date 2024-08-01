@@ -35,3 +35,4 @@ if (process.env.NODE_ENV !== 'production') {
 
 // Export for serverless deployment
 module.exports = { app: serverless(app) };
+
