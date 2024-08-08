@@ -1,26 +1,8 @@
 const express = require('express');
 const { applyWatermark } = require('../controllers/watermarkController');
-const { publishToPubSub } = require('../utils/publishToPubSub'); 
-const cors = require('cors');
+const { publishToPubSub } = require('../utils/publishToPubSub');
 
 const router = express.Router();
-
-const corsOptions = {
-  origin: function (origin, callback) {
-    const allowedOrigins = ['https://watermark-fron.web.app/', 'https://ass2vid1.storage.googleapis.com']; 
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'), false);
-    }
-  },
-  methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'PATCH', 'DELETE'],
-  allowedHeaders: ['X-Requested-With', 'content-type', 'Authorization'],
-  credentials: true,
-  optionsSuccessStatus: 200 
-};
-
-router.use(cors(corsOptions));
 
 router.post('/upload', (req, res) => {
   applyWatermark(req, res);
