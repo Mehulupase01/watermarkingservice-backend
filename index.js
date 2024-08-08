@@ -22,6 +22,14 @@ app.use(cors({
   allowedHeaders: 'X-Requested-With,content-type,Authorization'
 }));
 
+// Add CORS headers to every response
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  next();
+});
+
 app.use(express.json());
 app.use('/api/watermark', watermarkRoutes);
 
@@ -35,4 +43,3 @@ if (process.env.NODE_ENV !== 'production') {
 
 // Export for serverless deployment
 module.exports = { app: serverless(app) };
-
