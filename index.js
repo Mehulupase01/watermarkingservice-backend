@@ -8,7 +8,7 @@ const cors = require("cors");
 const app = express();
 
 // Set up CORS
-app.use(cors({
+const corsOptions = {
   origin: function (origin, callback) {
     const allowedOrigins = ['https://watermark-fron.web.app', 'https://ass2vid1.storage.googleapis.com'];
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
@@ -20,7 +20,9 @@ app.use(cors({
   credentials: true,
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   allowedHeaders: 'X-Requested-With,content-type,Authorization'
-}));
+};
+
+app.use(cors(corsOptions));
 
 // Add CORS headers to every response
 app.use((req, res, next) => {
